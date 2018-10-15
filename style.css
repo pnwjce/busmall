@@ -1,1 +1,18 @@
+body {
+  width: 960px
+  box-sizing: border-box;
+}
 
+div {
+  display: inline-block;
+  margin: 30px;
+}
+
+h2 {
+  text-align: center;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
