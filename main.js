@@ -32,20 +32,37 @@ ProdImage.prototype.renderProd = function() {
 
 //event listeners
 var prodClickHander = function(eventObject) {
+  console.log('in the click handler');
   do {
+    console.log('all product length' + allProdImages.length);
     var randomNumber = Math.floor(Math.random() * allProdImages.length);
-  } while(randomNumber === sampleProdImageLeftArrayIndex);
+  } while(randomNumber === sampleProdImageLeftArrayIndex || randomNumber === sampleProdImageMidArrayIndex || randomNumber === sampleProdImageRightArrayIndex);
+  console.log(randomNumber);
 
   allProdImages[sampleProdImageLeftArrayIndex].likes++;
   allProdImages[sampleProdImageLeftArrayIndex].shown++;
 
+  allProdImages[sampleProdImageMidArrayIndex].likes++;
+  allProdImages[sampleProdImageMidArrayIndex].shown++;
+
+  allProdImages[sampleProdImageRightArrayIndex].likes++;
+  allProdImages[sampleProdImageRightArrayIndex].shown++;
+
+
   sampleProdImageLeftArrayIndex = randomNumber;
   eventObject.target.src = allProdImages[randomNumber].src;
+
 };
 
-sampleProdImageLeft.addEventListener('click', prodClickHander);
+imageSection.addEventListener('click', prodClickHander);
 
-//new ProdImage()
+new ProdImage('./img/bag.jpg', 'R2D2 Roller Bag');
+new ProdImage('./img/banana.jpg', 'Banana Slicer');
+new ProdImage('./img/bathroom.jpg', 'Tablet Toilet paper holder');
+new ProdImage('./img/boots.jpg', 'Toeless Rainboots');
+new ProdImage('./img/breakfast.jpg', 'Toast oven/Coffee Maker');
+
+console.log(allProdImages);
 
 
 

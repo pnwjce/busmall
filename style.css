@@ -16,7 +16,7 @@ body {
 
 div {
   display: inline-block;
-  margin: 30px;
+  margin: 15px;
 }
 
 h2 {
@@ -25,5 +25,5 @@ h2 {
 
 img {
   height: 250px;
-  width: 250spx;
+  width: 250px;
 }
