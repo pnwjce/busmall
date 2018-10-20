@@ -9,8 +9,9 @@ var sampleProdLeftText = document.getElementById('prod-text-left');
 var sampleProdMidText = document.getElementById('prod-text-middle');
 var sampleProdRightText = document.getElementById('prod-text-right');
 var sampleProdImageLeftArrayIndex = 0;
-var sampleProdImageMidArrayIndex = 0;
-var sampleProdImageRightArrayIndex = 0;
+var sampleProdImageMidArrayIndex = 4;
+var sampleProdImageRightArrayIndex = 8;
+var clickCount = 0;
 
 
 //Images array
@@ -30,6 +31,20 @@ ProdImage.prototype.renderProd = function() {
   sampleProdImageLeft.src = this.src;
 };
 
+ProdImage.prototype.renderList = function() {
+  var prodList = document.getElementById('Products');
+  var listItemEl = document.createElement('li');
+  listItemEl.textContent = this.name + ' was liked ' + this.likes + ' times. ';
+  prodList.appendChild(listItemEl);
+};
+
+var list = function() {
+  for(var i = 0; i < allProdImages.length; i++) {
+    allProdImages[i].renderList();
+  }
+};
+
+
 //event listeners
 var prodClickHander = function(event) {
   do {
@@ -41,7 +56,7 @@ var prodClickHander = function(event) {
   do {
     var randomNumber3 = Math.floor(Math.random() * allProdImages.length);
   } while(randomNumber3 === sampleProdImageLeftArrayIndex || randomNumber3 === sampleProdImageRightArrayIndex || randomNumber3 === sampleProdImageRightArrayIndex || randomNumber3 === randomNumber2 || randomNumber3 === randomNumber);
-
+  
   //tracking likes and shown
   if(event.target.id === 'left') {
     allProdImages[sampleProdImageLeftArrayIndex].likes++;
@@ -57,11 +72,12 @@ var prodClickHander = function(event) {
   allProdImages[sampleProdImageLeftArrayIndex].shown++;
   allProdImages[sampleProdImageMidArrayIndex].shown++;
   allProdImages[sampleProdImageRightArrayIndex].shown++;
-
+  
+  
   sampleProdImageLeftArrayIndex = randomNumber;
   sampleProdImageMidArrayIndex = randomNumber2;
   sampleProdImageRightArrayIndex = randomNumber3;
-
+  
   //event.target.src = allProdImages[randomNumber].src;
   sampleProdImageLeft.src = allProdImages[randomNumber].src;
   sampleProdImageMid.src = allProdImages[randomNumber2].src;
@@ -69,10 +85,23 @@ var prodClickHander = function(event) {
   sampleProdLeftText.textContent = allProdImages[randomNumber].name;
   sampleProdMidText.textContent = allProdImages[randomNumber2].name;
   sampleProdRightText.textContent = allProdImages[randomNumber3].name;
-
+  
+  clickCount++;
+  if (clickCount === 25) {
+    imageSection.removeEventListener('click', prodClickHander);
+    list();
+  }
 };
 
 imageSection.addEventListener('click', prodClickHander);
+
+
+
+
+
+
+
+
 
 new ProdImage('./img/bag.jpg', 'R2D2 Roller Bag');
 new ProdImage('./img/banana.jpg', 'Banana Slicer');
@@ -85,16 +114,16 @@ new ProdImage('./img/cthulhu.jpg', 'Cthulhu Action Figure');
 new ProdImage('./img/dog-duck.jpg', 'Doggie Duck Mask');
 new ProdImage('./img/dragon.jpg', 'Dragon Meat');
 new ProdImage('./img/pen.jpg', 'Pen Cap Utensils');
-new ProdImage('./img/pet-sweep', 'Pen Sweeper Booties');
+new ProdImage('./img/pet-sweep.jpg', 'Pet Sweeper Booties');
 new ProdImage('./img/scissors.jpg', 'Pizza Scissors');
 new ProdImage('./img/shark.jpg', 'Shark Sleeping Bag');
 new ProdImage('./img/sweep.png', 'Baby Sweeper Sleeper');
-new ProdImage('./img/tautaun.jpg', 'Tauntaun Sleeping Bag');
+new ProdImage('./img/tauntaun.jpg', 'Tauntaun Sleeping Bag');
 new ProdImage('./img/unicorn.jpg', 'Unicorn Meat');
 new ProdImage('./img/usb.gif', 'Octopus USB stick');
 new ProdImage('./img/water-can.jpg', 'Self-Watering Can');
-new ProdImage('./img/wine-glass', 'Closed Top Wine Glass');
-
+new ProdImage('./img/wine-glass.jpg', 'Closed Top Wine Glass');
 
 console.log(allProdImages);
+
 
