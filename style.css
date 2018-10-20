@@ -1,1 +1,29 @@
+* {
+  background-color: #ffee00;
+}
 
+header {
+  text-align: right;
+  font-size: 30px;
+}
+
+body {
+  width: 960px;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+
+div {
+  display: inline-block;
+  margin: 15px;
+}
+
+h2 {
+  text-align: center;
+}
+
+img {
+  height: 250px;
+  width: 250px;
+}
