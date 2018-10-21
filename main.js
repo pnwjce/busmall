@@ -89,6 +89,7 @@ var prodClickHander = function(event) {
   clickCount++;
   //adding local storage
   localStorage.setItem('allLikes', JSON.stringify(allProdImages));
+  console.log(localStorage);
   if (clickCount === 25) {
     imageSection.removeEventListener('click', prodClickHander);
     renderChart();
