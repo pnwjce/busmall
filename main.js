@@ -87,6 +87,9 @@ var prodClickHander = function(event) {
   sampleProdRightText.textContent = allProdImages[randomNumber3].name;
   
   clickCount++;
+  //adding local storage
+  localStorage.setItem('allLikes', JSON.stringify(allProdImages));
+  console.log(localStorage);
   if (clickCount === 25) {
     imageSection.removeEventListener('click', prodClickHander);
     renderChart();
@@ -170,4 +173,6 @@ var renderChart = function() {
 
   var renderChart = new Chart(ctx, barChart);
 };
+
+
 
