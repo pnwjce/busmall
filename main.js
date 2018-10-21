@@ -31,12 +31,12 @@ ProdImage.prototype.renderProd = function() {
   sampleProdImageLeft.src = this.src;
 };
 
-ProdImage.prototype.renderList = function() {
-  var prodList = document.getElementById('Products');
-  var listItemEl = document.createElement('li');
-  listItemEl.textContent = this.name + ' was liked ' + this.likes + ' times. ';
-  prodList.appendChild(listItemEl);
-};
+// ProdImage.prototype.renderList = function() {
+//   var prodList = document.getElementById('Products');
+//   var listItemEl = document.createElement('li');
+//   listItemEl.textContent = this.name + ' was liked ' + this.likes + ' times. ';
+//   prodList.appendChild(listItemEl);
+// };
 
 var list = function() {
   for(var i = 0; i < allProdImages.length; i++) {
@@ -89,20 +89,14 @@ var prodClickHander = function(event) {
   clickCount++;
   if (clickCount === 25) {
     imageSection.removeEventListener('click', prodClickHander);
-    list();
+    renderChart();
   }
 };
 
 imageSection.addEventListener('click', prodClickHander);
 
 
-
-
-
-
-
-
-
+//adding images
 new ProdImage('./img/bag.jpg', 'R2D2 Roller Bag');
 new ProdImage('./img/banana.jpg', 'Banana Slicer');
 new ProdImage('./img/bathroom.jpg', 'Tablet Toilet paper holder');
@@ -126,4 +120,54 @@ new ProdImage('./img/wine-glass.jpg', 'Closed Top Wine Glass');
 
 console.log(allProdImages);
 
+
+//======================================================//
+
+var ctx = document.getElementById('chart').getContext('2d');
+console.log(ctx, 'yo');
+
+var renderChart = function() {
+  var prodNames = [];
+  var prodLikes = [];
+  var prodShown = [];
+  var colors = [];
+  for(var i in allProdImages) {
+    prodNames.push(allProdImages[i].name);
+    prodLikes.push(allProdImages[i].likes);
+    prodShown.push(allProdImages[i].shown);
+    colors.push('rgb(175, 23, 10)', 'gb(237, 110, 14)', 'rgb(239, 221, 19)', 'rgb(209, 239, 19)', 'rgb(147, 239, 19)', 'rgb(19, 239, 132)', 'rgb(19, 228, 239)');
+  }
+
+  var chartData = {
+    labels: prodNames,
+    datasets: [{
+      label: 'Number of Votes per Product',
+      data: prodLikes,
+      backgroundColor: colors,
+      borderWidth: 1,
+    }],
+  };
+  
+  var chartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    },
+    animation: {
+      duration: 1400,
+    },
+    responsive: true,
+  };
+
+  var barChart = {
+    type: 'bar',
+    data: chartData,
+    options: chartOptions,
+  };
+
+  var renderChart = new Chart(ctx, barChart);
+};
 
