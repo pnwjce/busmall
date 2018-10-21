@@ -27,3 +27,7 @@ img {
   height: 250px;
   width: 250px;
 }
+
+#chart {
+  background-color: azure;
+}
